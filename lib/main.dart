@@ -16,8 +16,6 @@ class MyApp extends StatelessWidget {
 }
 
 class Calculator extends StatefulWidget {
-  const Calculator({Key? key}) : super(key: key);
-
   @override
   _CalculatorState createState() => _CalculatorState();
 }
@@ -25,7 +23,8 @@ class Calculator extends StatefulWidget {
 class _CalculatorState extends State<Calculator> {
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width; //to make width follow the phone size
+    //to make width follow the phone size
+    final width = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Colors.black,
       body: Column(
@@ -33,7 +32,6 @@ class _CalculatorState extends State<Calculator> {
           Container(
             height: 300,
             width: width,
-            color: Colors.green,
             child: Align(
               alignment: Alignment.bottomRight,
               child: Text(
@@ -44,8 +42,56 @@ class _CalculatorState extends State<Calculator> {
                 ),
               ),
             ),
-          )
+          ),
+          //=================== Done First Column ==========================//
+          Row(
+            children: [
+              CircleButton(
+                title: 'AC',
+                color: Colors.grey,
+                textColor: Colors.black,
+              ),
+              CircleButton(
+                title: '+/-',
+                color: Colors.grey,
+                textColor: Colors.black,
+              ),
+              CircleButton(
+                title: '&',
+                color: Colors.grey,
+                textColor: Colors.black,
+              ),
+              CircleButton(
+                title: '÷',
+                color: Colors.orangeAccent,
+                textColor: Colors.white,
+              ),
+            ],
+          ),
         ],
+      ),
+    );
+  }
+}
+
+class CircleButton extends StatelessWidget {
+  final String title;
+  final Color color;
+  final Color textColor;
+
+  CircleButton({required this.title, required this.color, required this.textColor});
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: () {},
+      child: Text(
+        title,
+        style: TextStyle(color: textColor),
+      ),
+      style: ElevatedButton.styleFrom(
+        primary: color,
+        shape: CircleBorder(),
       ),
     );
   }
