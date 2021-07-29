@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+// ignore: implementation_imports
 import 'package:flutter/src/material/colors.dart';
 
 void main() {
@@ -22,6 +23,11 @@ class Calculator extends StatefulWidget {
 }
 
 class _CalculatorState extends State<Calculator> {
+  TextEditingController inputOne = TextEditingController();
+  TextEditingController inputTwo = TextEditingController();
+
+  String output = '0';
+
   @override
   Widget build(BuildContext context) {
     //to make width follow the phone size
@@ -36,7 +42,7 @@ class _CalculatorState extends State<Calculator> {
             child: Align(
               alignment: Alignment.bottomRight,
               child: Text(
-                '123',
+                '$output',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 42,
@@ -155,10 +161,12 @@ class _CalculatorState extends State<Calculator> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    CircleButton(
-                      title: '0',
-                      color: Colors.grey.shade800,
-                      textColor: Colors.white,
+                    Expanded(
+                      child: RectButton(
+                        title: '0',
+                        color: Colors.grey.shade800,
+                        textColor: Colors.white,
+                      ),
                     ),
                     CircleButton(
                       title: '.',
@@ -192,7 +200,7 @@ class CircleButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height / 8;
+    final height = MediaQuery.of(context).size.height / 9;
     return Container(
       height: height,
       child: Padding(
@@ -206,6 +214,39 @@ class CircleButton extends StatelessWidget {
           style: ElevatedButton.styleFrom(
             primary: color,
             shape: CircleBorder(),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class RectButton extends StatelessWidget {
+  final String title;
+  final Color color;
+  final Color textColor;
+
+  RectButton(
+      {required this.title, required this.color, required this.textColor});
+
+  @override
+  Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height / 8;
+    return Container(
+      height: height,
+      child: Padding(
+        padding: EdgeInsets.all(5),
+        child: ElevatedButton(
+          onPressed: () {},
+          child: Text(
+            title,
+            style: TextStyle(color: textColor),
+          ),
+          style: ElevatedButton.styleFrom(
+            primary: color,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(40),
+            ),
           ),
         ),
       ),
