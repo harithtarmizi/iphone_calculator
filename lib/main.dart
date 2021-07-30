@@ -52,14 +52,14 @@ class _CalculatorState extends State<Calculator> {
           ),
           //=================== Done First Column ==========================//
           Padding(
-            padding: const EdgeInsets.all(4),
+            padding: const EdgeInsets.all(10),
             child: Column(
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     CircleButton(
-                      title: 'AC',
+                      title: 'C',
                       color: Colors.grey,
                       textColor: Colors.black,
                       onTap: () {
@@ -71,7 +71,7 @@ class _CalculatorState extends State<Calculator> {
                       },
                     ),
                     CircleButton(
-                      title: '+/-',
+                      title: 'D',
                       color: Colors.grey,
                       textColor: Colors.black,
                       onTap: () {
@@ -89,9 +89,12 @@ class _CalculatorState extends State<Calculator> {
                       textColor: Colors.black,
                       onTap: () {
                         print('Tapped %');
+                        var x = double.parse(inputOne.text);
+
+                        var z = x / 100;
 
                         setState(() {
-                          inputOne.text = inputOne.text + '%';
+                          inputOne.text = z.toString();
                         });
                       },
                     ),
@@ -390,7 +393,7 @@ class CircleButton extends StatelessWidget {
             padding: const EdgeInsets.all(20),
             child: Text(
               title,
-              style: TextStyle(color: textColor),
+              style: TextStyle(color: textColor, fontSize: 16, fontWeight: FontWeight.bold),
             ),
           ),
           style: ElevatedButton.styleFrom(
@@ -426,7 +429,7 @@ class RectButton extends StatelessWidget {
           onPressed: onTap,
           child: Text(
             title,
-            style: TextStyle(color: textColor),
+            style: TextStyle(color: textColor, fontSize: 16, fontWeight: FontWeight.bold),
           ),
           style: ElevatedButton.styleFrom(
             primary: color,
