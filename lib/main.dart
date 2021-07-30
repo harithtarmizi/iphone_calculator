@@ -65,7 +65,7 @@ class _CalculatorState extends State<Calculator> {
                       onTap: () {
                         print('Tapped Clear');
 
-                                                setState(() {
+                        setState(() {
                           inputOne.text = '';
                         });
                       },
@@ -76,14 +76,23 @@ class _CalculatorState extends State<Calculator> {
                       textColor: Colors.black,
                       onTap: () {
                         print('+/-');
+
+                        setState(() {
+                          inputOne.text = inputOne.text
+                              .substring(0, inputOne.text.length - 1);
+                        });
                       },
                     ),
                     CircleButton(
-                      title: '&',
+                      title: '%',
                       color: Colors.grey,
                       textColor: Colors.black,
                       onTap: () {
-                        print('Tapped &');
+                        print('Tapped %');
+
+                        setState(() {
+                          inputOne.text = inputOne.text + '%';
+                        });
                       },
                     ),
                     CircleButton(
@@ -92,6 +101,10 @@ class _CalculatorState extends State<Calculator> {
                       textColor: Colors.white,
                       onTap: () {
                         print('Tapped ÷');
+
+                        setState(() {
+                          inputOne.text = inputOne.text + '÷';
+                        });
                       },
                     ),
                   ],
@@ -142,6 +155,10 @@ class _CalculatorState extends State<Calculator> {
                       textColor: Colors.white,
                       onTap: () {
                         print('Tapped x');
+
+                        setState(() {
+                          inputOne.text = inputOne.text + 'x';
+                        });
                       },
                     ),
                   ],
@@ -192,6 +209,10 @@ class _CalculatorState extends State<Calculator> {
                       textColor: Colors.white,
                       onTap: () {
                         print('Tapped -');
+
+                        setState(() {
+                          inputOne.text = inputOne.text + '-';
+                        });
                       },
                     ),
                   ],
@@ -242,6 +263,10 @@ class _CalculatorState extends State<Calculator> {
                       textColor: Colors.white,
                       onTap: () {
                         print('Tapped +');
+
+                        setState(() {
+                          inputOne.text = inputOne.text + '+';
+                        });
                       },
                     ),
                   ],
@@ -257,9 +282,9 @@ class _CalculatorState extends State<Calculator> {
                         onTap: () {
                           print('Tapped 0');
 
-                                                  setState(() {
-                          inputOne.text = inputOne.text + '0';
-                        });
+                          setState(() {
+                            inputOne.text = inputOne.text + '0';
+                          });
                         },
                       ),
                     ),
@@ -272,9 +297,9 @@ class _CalculatorState extends State<Calculator> {
                         onTap: () {
                           print('Tapped .');
 
-                                                  setState(() {
-                          inputOne.text = inputOne.text + '.';
-                        });
+                          setState(() {
+                            inputOne.text = inputOne.text + '.';
+                          });
                         },
                       ),
                     ),
@@ -284,6 +309,48 @@ class _CalculatorState extends State<Calculator> {
                       textColor: Colors.white,
                       onTap: () {
                         print('Tapped =');
+
+                        if (inputOne.text.contains('+')) {
+                          var data = inputOne.text.split('+');
+
+                          var x = double.parse(data[0]);
+                          var y = double.parse(data[1]);
+                          var z = x + y;
+
+                          setState(() {
+                            inputOne.text = z.toString();
+                          });
+                        } else if (inputOne.text.contains('-')) {
+                          var data = inputOne.text.split('-');
+
+                          var x = double.parse(data[0]);
+                          var y = double.parse(data[1]);
+                          var z = x - y;
+
+                          setState(() {
+                            inputOne.text = z.toString();
+                          });
+                        } else if (inputOne.text.contains('x')) {
+                          var data = inputOne.text.split('x');
+
+                          var x = double.parse(data[0]);
+                          var y = double.parse(data[1]);
+                          var z = x * y;
+
+                          setState(() {
+                            inputOne.text = z.toString();
+                          });
+                        } else if (inputOne.text.contains('÷')) {
+                          var data = inputOne.text.split('÷');
+
+                          var x = double.parse(data[0]);
+                          var y = double.parse(data[1]);
+                          var z = x / y;
+
+                          setState(() {
+                            inputOne.text = z.toString();
+                          });
+                        }
                       },
                     ),
                   ],
